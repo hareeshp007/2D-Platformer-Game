@@ -8,6 +8,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        bool isjump;
+        bool cntrl = Input.GetKey(KeyCode.LeftControl);
+        animator.SetBool("Iscrouch", cntrl);
+        float vert = Input.GetAxisRaw("Vertical");
+        animator.SetFloat("vertical",vert);
+        isjump = true;
+        /*if (vert>0 && isjump == true)
+        {
+            isjump = false;
+            animator.SetTrigger("Isjumping");
+            isjump = tru;
+        }*/
+        
         float speed = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(speed));
         Vector3 scale=transform.localScale;
