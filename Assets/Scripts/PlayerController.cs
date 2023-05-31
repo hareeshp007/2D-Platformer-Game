@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +9,9 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
 {
+    public scorecounter scorecounter;
+    public int Keyscore=10;
+
     public Animator animator;
     public float speed,jumppower;
     private Rigidbody2D rb2d;
@@ -79,6 +84,12 @@ public class PlayerController : MonoBehaviour
             //Onground = true;
         }
         
-        Debug.Log("collision detected" +collision.gameObject.tag);
+        //Debug.Log("collision detected" +collision.gameObject.tag);
+    }
+
+    public void Collect()
+    {
+        Debug.Log("collision of Key detected");
+        scorecounter.Increasescore(Keyscore);
     }
 }
