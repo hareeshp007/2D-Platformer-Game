@@ -297,6 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca91e34d50f8ab54e9893ce34945c977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorecounter: {fileID: 0}
+  Keyscore: 10
   animator: {fileID: 2940686627999785487}
   speed: 4
   jumppower: 8

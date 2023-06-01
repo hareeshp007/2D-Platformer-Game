@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb2d =gameObject.GetComponent<Rigidbody2D>();   
+
         
     }
     private void Update()
