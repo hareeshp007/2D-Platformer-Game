@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
 
@@ -92,5 +93,21 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("collision of Key detected");
         scorecounter.Increasescore(Keyscore);
+    }
+
+    public void Death()
+    {
+        animator.SetBool("isAlive", false);
+        restartwithdealay();
+    }
+    public void restartwithdealay()
+    {
+        Invoke("restart", 2f);
+    }
+    public void restart()
+    {
+        int CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(CurrentSceneIndex);
+        Debug.Log("restart current level");
     }
 }

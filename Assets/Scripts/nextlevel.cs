@@ -2,14 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class nextlevel : MonoBehaviour
 {
+    public TextMeshProUGUI wontext;
+    public int lastlevelnumber;
+    private void Start()
+    {
+        wontext.text = "";
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            
             Debug.Log("finish collider has been triggered");
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             // Check if the next level index is within the valid range
@@ -20,7 +28,15 @@ public class nextlevel : MonoBehaviour
             else
             {
                 Debug.LogError("Invalid next level index!");
-            }
+                if (nextSceneIndex > (lastlevelnumber - 1))
+                {
+                    wontext.text = "YOU WON !";
+                    SceneManager.LoadScene(0);
+                }
+                
+                }
+                
+            
         }
     }
 }
