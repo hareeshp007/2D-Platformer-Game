@@ -10,7 +10,7 @@ public class nextlevel : MonoBehaviour
     public int lastlevelnumber;
     private void Start()
     {
-        wontext.text = "";
+        wontext=GetComponent<TextMeshProUGUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +31,7 @@ public class nextlevel : MonoBehaviour
                 if (nextSceneIndex > (lastlevelnumber - 1))
                 {
                     wontext.text = "YOU WON !";
+                    
                     SceneManager.LoadScene(0);
                 }
                 

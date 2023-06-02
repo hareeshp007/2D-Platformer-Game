@@ -11,7 +11,10 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class PlayerController : MonoBehaviour
 {
     public scorecounter scorecounter;
+    public healthcontroller healthcontroller;
     public int Keyscore=10;
+    [SerializeField]
+    private int health = 3;
 
     public Animator animator;
     public float speed,jumppower;
@@ -24,8 +27,7 @@ public class PlayerController : MonoBehaviour
     
     private void Awake()
     {
-        rb2d =gameObject.GetComponent<Rigidbody2D>();   
-
+        rb2d = GetComponent<Rigidbody2D>();   
         
     }
     private void Update()
@@ -109,5 +111,17 @@ public class PlayerController : MonoBehaviour
         int CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(CurrentSceneIndex);
         Debug.Log("restart current level");
+    }
+
+    public void TakeDamage()
+    {
+        health-=1;
+        Debug.Log("health :" + health);
+        healthcontroller.Health(health);
+        animator.SetTrigger("ishurt");
+        if(health <= 0)
+        {
+            Death();
+        }
     }
 }
