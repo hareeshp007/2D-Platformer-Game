@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     public scorecounter scorecounter;
     public healthcontroller healthcontroller;
+    public GameoverController GameoverController;
     public int Keyscore=10;
     [SerializeField]
     private int health = 3;
@@ -27,8 +28,13 @@ public class PlayerController : MonoBehaviour
     
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();   
+        rb2d = GetComponent<Rigidbody2D>();
+        //healthcontroller.Health(health);
         
+    }
+    private void Start()
+    {
+        healthcontroller.Health(health);
     }
     private void Update()
     {
@@ -100,7 +106,12 @@ public class PlayerController : MonoBehaviour
     public void Death()
     {
         animator.SetBool("isAlive", false);
-        restartwithdealay();
+        GameoverController.PlayerDied();
+        
+        this.enabled = false;
+
+      
+        //restartwithdealay();
     }
     public void restartwithdealay()
     {

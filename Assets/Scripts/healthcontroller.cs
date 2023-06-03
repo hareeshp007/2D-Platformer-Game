@@ -6,7 +6,7 @@ using UnityEngine;
 public class healthcontroller : MonoBehaviour
 {
     private TextMeshProUGUI healthtext;
-    private int currHealth=3;
+    private int currHealth;
     private void Awake()
     {
         healthtext = GetComponent<TextMeshProUGUI>();
