@@ -6,11 +6,9 @@ using TMPro;
 
 public class nextlevel : MonoBehaviour
 {
-    public TextMeshProUGUI wontext;
     public int lastlevelnumber;
     private void Start()
     {
-        wontext=GetComponent<TextMeshProUGUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +18,7 @@ public class nextlevel : MonoBehaviour
             
             Debug.Log("finish collider has been triggered");
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            Debug.Log(nextSceneIndex);
             // Check if the next level index is within the valid range
             if (nextSceneIndex >= 0 && nextSceneIndex < SceneManager.sceneCountInBuildSettings)
             {
@@ -28,9 +27,10 @@ public class nextlevel : MonoBehaviour
             else
             {
                 Debug.LogError("Invalid next level index!");
-                if (nextSceneIndex > (lastlevelnumber - 1))
+                if (nextSceneIndex >= (lastlevelnumber))
                 {
-                    wontext.text = "YOU WON !";
+                    Debug.Log("You Won");
+                    Debug.Log("Lobby Return");
                     
                     SceneManager.LoadScene(0);
                 }

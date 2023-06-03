@@ -8,9 +8,11 @@ using UnityEngine.UI;
 public class GameoverController : MonoBehaviour
 {
     public Button Playbutton;
+    public Button MainmenuButton;
     private void Awake()
     {
         Playbutton.onClick.AddListener(Restart);
+        MainmenuButton.onClick.AddListener(Mainmenu);
     }
     public void PlayerDied()
     {
@@ -20,5 +22,9 @@ public class GameoverController : MonoBehaviour
     {
         int currentscene=SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentscene);
+    }
+    private void Mainmenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
