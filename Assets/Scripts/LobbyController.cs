@@ -8,7 +8,8 @@ public class LobbyController : MonoBehaviour
 {
     public Button Playbutton;
     public Button Exitbutton;
-    public string Level1;
+    //public string Level1;
+    public GameObject LevelSelectionPopup;
     private void Awake()
     {
         Playbutton.onClick.AddListener(Play);
@@ -16,7 +17,8 @@ public class LobbyController : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene(Level1);
+        LevelSelectionPopup.SetActive(true);
+        //SceneManager.LoadScene(Level1);
     }
     public void Exit()
     {

@@ -16,6 +16,8 @@ public class GameoverController : MonoBehaviour
     }
     public void PlayerDied()
     {
+        PlayerPrefs.SetString("LastLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.Save();
         gameObject.SetActive(true);
     }
     private void Restart()

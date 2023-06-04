@@ -107,7 +107,8 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isAlive", false);
         GameoverController.PlayerDied();
-        
+        PlayerPrefs.SetString("LastLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.Save();
         this.enabled = false;
 
       
