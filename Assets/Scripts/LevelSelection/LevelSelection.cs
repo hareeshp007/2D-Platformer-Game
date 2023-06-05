@@ -10,6 +10,7 @@ public class LevelSelection : MonoBehaviour
 {
     private Button LevelButton;
     public string LevelName;
+    public int Levelnum;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,24 @@ public class LevelSelection : MonoBehaviour
 
     private void LevelSelect()
     {
-        SceneManager.LoadScene(LevelName);
+        LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
+        switch (levelStatus)
+        {
+            case LevelStatus.locked:
+                Debug.Log(Levelnum + " This Level is Locked:");
+                break;
+            case LevelStatus.unlocked:
+                Debug.Log(Levelnum + " This Level is Unlocked:");
+                LevelManager.Instance.LoadAnyLevel(Levelnum);
+                //SceneManager.LoadScene(LevelName);
+                break;
+            case LevelStatus.completed:
+                Debug.Log(Levelnum + " This Level is Completed:");
+                LevelManager.Instance.LoadAnyLevel(Levelnum);
+                //SceneManager.LoadScene(LevelName);
+                break;
+        }
+        
     }
 
     // Update is called once per frame

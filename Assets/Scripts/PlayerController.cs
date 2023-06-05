@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     public void Collect()
     {
-        Debug.Log("collision of Key detected");
+        //Debug.Log("collision of Key detected");
         scorecounter.Increasescore(Keyscore);
     }
 
@@ -121,13 +121,13 @@ public class PlayerController : MonoBehaviour
     {
         int CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(CurrentSceneIndex);
-        Debug.Log("restart current level");
+        //Debug.Log("restart current level");
     }
 
     public void TakeDamage()
     {
         health-=1;
-        Debug.Log("health :" + health);
+        //Debug.Log("health :" + health);
         healthcontroller.Health(health);
         animator.SetTrigger("ishurt");
         if(health <= 0)

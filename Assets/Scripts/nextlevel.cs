@@ -6,6 +6,7 @@ using TMPro;
 
 public class nextlevel : MonoBehaviour
 {
+    public GameWonController woncontroller;
     public int lastlevelnumber;
     private void Start()
     {
@@ -17,27 +18,30 @@ public class nextlevel : MonoBehaviour
         {
             
             Debug.Log("finish collider has been triggered");
-            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            Debug.Log(nextSceneIndex);
-            // Check if the next level index is within the valid range
-            if (nextSceneIndex >= 0 && nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            LevelManager.Instance.MarkCurrentLevelCompleted();
+            woncontroller.showWonScreen();
+        }
+    }
+    public void Loadnextscene()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        Debug.Log(nextSceneIndex);
+        // Check if the next level index is within the valid range
+        if (nextSceneIndex >= 0 && nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogError("Invalid next level index!");
+            if (nextSceneIndex >= (lastlevelnumber))
             {
-                SceneManager.LoadScene(nextSceneIndex);
+                Debug.Log("You Won");
+                Debug.Log("Lobby Return");
+
+                SceneManager.LoadScene(0);
             }
-            else
-            {
-                Debug.LogError("Invalid next level index!");
-                if (nextSceneIndex >= (lastlevelnumber))
-                {
-                    Debug.Log("You Won");
-                    Debug.Log("Lobby Return");
-                    
-                    SceneManager.LoadScene(0);
-                }
-                
-                }
-                
-            
+
         }
     }
 }

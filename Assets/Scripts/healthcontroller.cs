@@ -17,7 +17,7 @@ public class healthcontroller : MonoBehaviour
     }
     public void Health(int health)
     {
-        Debug.Log("healthcontroller");
+        //Debug.Log("healthcontroller");
         currHealth = health;
         RefreshGUI();
     }
