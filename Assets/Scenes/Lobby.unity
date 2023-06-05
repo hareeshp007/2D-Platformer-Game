@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelName: Level 2
+  Levelnum: 2
 --- !u!1 &437898347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,6 +1204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelName: Level 3
+  Levelnum: 3
 --- !u!1 &957625269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelName: Level 1
+  Levelnum: 1
 --- !u!1 &1445606058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,6 +2297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelName: Level 4
+  Levelnum: 4
 --- !u!1 &1702249826
 GameObject:
   m_ObjectHideFlags: 0
