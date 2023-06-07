@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     
     public AudioSource SoundEffect;
     public AudioSource SoundMusic;
+    public AudioSource SoundLevel;
     [Range(0f, 1f)] public float userVolume;
     public bool IsMute;
     public bool MoveLoop;
@@ -44,6 +45,20 @@ public class SoundManager : MonoBehaviour
         SoundEffect.volume = Volume;
         SoundMusic.volume = Volume;
     }
+    public void PlayLevel(Sounds sound)
+    {
+        if (IsMute) return;
+        AudioClip clip = getSoundClip(sound);
+        if (clip != null)
+        {
+            SoundLevel.clip = clip;
+            SoundLevel.Play();
+        }
+        else
+        {
+            Debug.LogError("Sound Clip :" + clip.name + "not found");
+        }
+    }
     public void PlayMusic(Sounds sound)
     {
         if(IsMute)return;
@@ -64,9 +79,15 @@ public class SoundManager : MonoBehaviour
         AudioClip clip = getSoundClip(sound);
         if(clip != null)
         {
-            if (FootstepLoop(sound)) { SoundEffect.loop = true; }
-            else { SoundEffect.loop = false; }
-            SoundEffect.PlayOneShot(clip);
+            if (FootstepLoop(sound)) {
+                SoundEffect.clip = clip;
+                SoundEffect.loop = true;
+                SoundEffect.Play(); }
+            else {
+                SoundEffect.loop = false;
+                SoundEffect.PlayOneShot(clip); }
+            
+            
         }
         else
         {
@@ -95,6 +116,11 @@ public class SoundManager : MonoBehaviour
         }
         return null;
     }
+
+    public void StopEffect()
+    {
+        SoundEffect.Stop();
+    }
 }
 
 
@@ -110,5 +136,7 @@ public enum Sounds
     PlayerDied,
     EnemyDeath,
     music,
-    PlayerHurt
+    PlayerHurt,
+    LevelFinished,
+    LevelStarted
 }

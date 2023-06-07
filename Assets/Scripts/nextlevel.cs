@@ -16,8 +16,7 @@ public class nextlevel : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            
-            Debug.Log("finish collider has been triggered");
+            SoundManager.Instance.PlayLevel(Sounds.LevelFinished);
             LevelManager.Instance.MarkCurrentLevelCompleted();
             woncontroller.showWonScreen();
         }
@@ -25,8 +24,6 @@ public class nextlevel : MonoBehaviour
     public void Loadnextscene()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        Debug.Log(nextSceneIndex);
-        // Check if the next level index is within the valid range
         if (nextSceneIndex >= 0 && nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
@@ -36,9 +33,6 @@ public class nextlevel : MonoBehaviour
             Debug.LogError("Invalid next level index!");
             if (nextSceneIndex >= (lastlevelnumber))
             {
-                Debug.Log("You Won");
-                Debug.Log("Lobby Return");
-
                 SceneManager.LoadScene(0);
             }
 

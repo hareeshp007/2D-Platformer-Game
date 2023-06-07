@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float speed,jumppower;
     private Rigidbody2D rb2d;
     public bool Onground;
+    public bool isMoving;
 
     public Transform feetpos;
     public float checkRadius;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     
     private void Awake()
     {
+        SoundManager.Instance.PlayLevel(Sounds.LevelStarted);
         rb2d = GetComponent<Rigidbody2D>();
         //healthcontroller.Health(health);
         
@@ -46,13 +48,33 @@ public class PlayerController : MonoBehaviour
         Vector3 pos=transform.position; 
         float Hori = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
+
         PlayerMovementAnimation( Hori, vert, cntrl, jump);
         PlayerMovement(pos, Hori, vert, jump, scale);
+        MovingAudio(Hori);
     }
-
+    public void MovingAudio(float horizontal)
+    {
+        if (horizontal != 0 )
+        {
+            if (!isMoving)
+            {
+                SoundManager.Instance.Play(Sounds.PlayerMove);
+                isMoving = true;
+            }
+        }
+        else
+        {
+            if (isMoving)
+            {
+                SoundManager.Instance.StopEffect();
+                isMoving = false;
+            }
+        }
+    }
     private void PlayerMovement(Vector3 pos, float Hori, float vert, bool jump, Vector3 scale)
     {
-        SoundManager.Instance.Play(Sounds.PlayerMove);
+        //SoundManager.Instance.Play(Sounds.PlayerMove);
         pos.x += Hori * speed * Time.deltaTime;
         transform.position = pos;
         if (vert>0 && Onground)
