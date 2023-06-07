@@ -47,12 +47,12 @@ public class PlayerController : MonoBehaviour
         float Hori = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
         PlayerMovementAnimation( Hori, vert, cntrl, jump);
-        PlayerMovement(pos, Hori,vert, jump, scale);
+        PlayerMovement(pos, Hori, vert, jump, scale);
     }
 
     private void PlayerMovement(Vector3 pos, float Hori, float vert, bool jump, Vector3 scale)
     {
-
+        SoundManager.Instance.Play(Sounds.PlayerMove);
         pos.x += Hori * speed * Time.deltaTime;
         transform.position = pos;
         if (vert>0 && Onground)
@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             scale.x = 1 * Mathf.Abs(scale.x);
         }
+        
         transform.localScale = scale;
 
     }
@@ -105,9 +106,10 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
+        
         animator.SetBool("isAlive", false);
         GameoverController.PlayerDied();
-        
+        SoundManager.Instance.Play(Sounds.PlayerDied);
         this.enabled = false;
 
       
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
+        SoundManager.Instance.Play(Sounds.PlayerHurt);
         health-=1;
         //Debug.Log("health :" + health);
         healthcontroller.Health(health);

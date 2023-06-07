@@ -27,11 +27,13 @@ public class LevelSelection : MonoBehaviour
                 Debug.Log(Levelnum + " This Level is Locked:");
                 break;
             case LevelStatus.unlocked:
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 Debug.Log(Levelnum + " This Level is Unlocked:");
                 LevelManager.Instance.LoadAnyLevel(Levelnum);
                 //SceneManager.LoadScene(LevelName);
                 break;
             case LevelStatus.completed:
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 Debug.Log(Levelnum + " This Level is Completed:");
                 LevelManager.Instance.LoadAnyLevel(Levelnum);
                 //SceneManager.LoadScene(LevelName);
