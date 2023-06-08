@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -138,5 +137,6 @@ public enum Sounds
     music,
     PlayerHurt,
     LevelFinished,
-    LevelStarted
+    LevelStarted,
+    collect
 }

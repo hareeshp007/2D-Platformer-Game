@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Restartoncollision : MonoBehaviour
 {
@@ -10,19 +7,9 @@ public class Restartoncollision : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            GameoverController.PlayerDied();
-
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            playerController.Death();
         }
         
-    }
-    public void RestartwithDelay(float time)
-    {
-        Invoke("restart", time);
-    }
-    public void restart()
-    {
-        int CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(CurrentSceneIndex);
-        Debug.Log("restart current level");
     }
 }

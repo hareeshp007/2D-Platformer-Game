@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,10 +15,10 @@ public class GameWonController : MonoBehaviour
     {
         int currentsceneIndex = SceneManager.GetActiveScene().buildIndex;
         Restartbutton.onClick.AddListener(Restart);
-        MainmenuButton.onClick.AddListener(Mainmenu);
-        NextLevelButton.onClick.AddListener(Nextlevel);
+        MainmenuButton.onClick.AddListener(MainMenu);
+        NextLevelButton.onClick.AddListener(NextLevel);
     }
-    public void showWonScreen()
+    public void ShowWonScreen()
     {
         gameObject.SetActive(true);
     }
@@ -28,11 +27,11 @@ public class GameWonController : MonoBehaviour
         int currentsceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentsceneIndex);
     }
-    private void Mainmenu()
+    private void MainMenu()
     {
         SceneManager.LoadScene(0);
     }
-    private void Nextlevel()
+    private void NextLevel()
     {
         int currentsceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentsceneIndex+1;

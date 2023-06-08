@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +9,7 @@ public class GameoverController : MonoBehaviour
     private void Awake()
     {
         Playbutton.onClick.AddListener(Restart);
-        MainmenuButton.onClick.AddListener(Mainmenu);
+        MainmenuButton.onClick.AddListener(MainMenu);
     }
     public void PlayerDied()
     {
@@ -25,7 +22,7 @@ public class GameoverController : MonoBehaviour
         int currentscene=SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentscene);
     }
-    private void Mainmenu()
+    private void MainMenu()
     {
         SceneManager.LoadScene(0);
     }

@@ -1,12 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using static UnityEngine.EventSystems.EventTrigger;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private int health = 3;
 
     public Animator animator;
+    public ParticleSystem FailEffect;
     public float speed,jumppower;
     private Rigidbody2D rb2d;
     public bool Onground;
@@ -31,8 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         SoundManager.Instance.PlayLevel(Sounds.LevelStarted);
         rb2d = GetComponent<Rigidbody2D>();
-        //healthcontroller.Health(health);
-        
     }
     private void Start()
     {
@@ -55,7 +47,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MovingAudio(float horizontal)
     {
-        if (horizontal != 0 )
+        if (horizontal != 0 && Onground )
         {
             if (!isMoving)
             {
@@ -74,7 +66,6 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayerMovement(Vector3 pos, float Hori, float vert, bool jump, Vector3 scale)
     {
-        //SoundManager.Instance.Play(Sounds.PlayerMove);
         pos.x += Hori * speed * Time.deltaTime;
         transform.position = pos;
         if (vert>0 && Onground)
@@ -82,7 +73,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log(jump + "+ " + Onground);
             animator.SetTrigger("Isjumping");
             rb2d.velocity = Vector2.up * jumppower;
-            //rb2d.AddForce(new Vector2(0f, jumppower), ForceMode2D.Impulse);
             Onground = false;
         }
         if (Hori < 0)
@@ -105,49 +95,23 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Iscrouch", cntrl);
             animator.SetFloat("speed", Mathf.Abs(Hori));    
         }
-        
-        
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("ground"))
-        {
-            //Onground = true;
-        }
-        
-        //Debug.Log("collision detected" +collision.gameObject.tag);
     }
 
     public void Collect()
     {
-        //Debug.Log("collision of Key detected");
-        scorecounter.Increasescore(Keyscore);
+        SoundManager.Instance.Play(Sounds.collect);
+        scorecounter.IncreaseScore(Keyscore);
     }
 
     public void Death()
     {
-        
+        rb2d.gravityScale = 0f;
+        FailEffect.Play();
         animator.SetBool("isAlive", false);
         GameoverController.PlayerDied();
         SoundManager.Instance.Play(Sounds.PlayerDied);
         this.enabled = false;
-
-      
-        //restartwithdealay();
     }
-    public void restartwithdealay()
-    {
-        Invoke("restart", 2f);
-    }
-    public void restart()
-    {
-        int CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(CurrentSceneIndex);
-        //Debug.Log("restart current level");
-    }
-
     public void TakeDamage()
     {
         SoundManager.Instance.Play(Sounds.PlayerHurt);
@@ -159,5 +123,11 @@ public class PlayerController : MonoBehaviour
         {
             Death();
         }
+    }
+    public void LevelComplete()
+    {
+        int stopMoving=0;
+        animator.SetFloat("speed", stopMoving);
+        this.enabled = false;    
     }
 }

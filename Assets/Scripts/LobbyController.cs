@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyController : MonoBehaviour
 {
     public Button Playbutton;
     public Button Exitbutton;
-    //public string Level1;
     public GameObject LevelSelectionPopup;
     private void Awake()
     {
@@ -19,7 +15,6 @@ public class LobbyController : MonoBehaviour
     {
         SoundManager.Instance.Play(Sounds.ButtonClick);
         LevelSelectionPopup.SetActive(true);
-        //SceneManager.LoadScene(Level1);
     }
     public void Exit()
     {

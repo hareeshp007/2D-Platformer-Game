@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +7,6 @@ public class LevelManager : MonoBehaviour
     private static LevelManager instance;
     public static LevelManager Instance { get { return instance; } }
     public string[] Levels;
-
-
     private void Awake()
     {
         if(instance == null)
@@ -29,7 +25,6 @@ public class LevelManager : MonoBehaviour
         {
             SetLevelStatus(Levels[0], LevelStatus.unlocked);
         }
-        
     }
     public void LoadAnyLevel(int LevelNumber)
     {
@@ -38,10 +33,8 @@ public class LevelManager : MonoBehaviour
     }
     public void MarkCurrentLevelCompleted()
     {
-        //Set the current level completed
         Scene currentscene = SceneManager.GetActiveScene();  
         SetLevelStatus(currentscene.name, LevelStatus.completed);
-        //set the next following level unlocked
         int currentsceneIndex=Array.FindIndex(Levels, level => level == currentscene.name);
         int nextsceneindex = currentsceneIndex + 1;
         if (nextsceneindex < Levels.Length)
@@ -51,9 +44,7 @@ public class LevelManager : MonoBehaviour
         }else if(nextsceneindex >= Levels.Length)
         {
             Debug.Log("All Levels Are completed");
-        }
-        
-        
+        } 
     }
     public void SetLevelStatus(string Level,LevelStatus levelStatus)
     {

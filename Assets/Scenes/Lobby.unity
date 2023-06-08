@@ -1153,6 +1153,8 @@ MonoBehaviour:
     soundclip: {fileID: 8300000, guid: 0cce91cb3c5bf814e805233571eab8ea, type: 3}
   - soundType: 7
     soundclip: {fileID: 8300000, guid: 0cce91cb3c5bf814e805233571eab8ea, type: 3}
+  - soundType: 8
+    soundclip: {fileID: 8300000, guid: 8d331b50969371c4db3319a915ef2cad, type: 3}
 --- !u!1 &813318173
 GameObject:
   m_ObjectHideFlags: 0

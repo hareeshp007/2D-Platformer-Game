@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -10,14 +8,17 @@ public class scorecounter : MonoBehaviour
     private void Awake()
     {
         scoretext = GetComponent<TextMeshProUGUI>();
+        score = PlayerPrefs.GetInt("Collectables");
     }
     private void Start()
     {
         RefreshGUI();
     }
-    public void Increasescore(int increment)
+    public void IncreaseScore(int increment)
     {
+        score = PlayerPrefs.GetInt("Collectables");
         score += increment;
+        PlayerPrefs.SetInt("Collectables", score);
         RefreshGUI();
     }
     private void RefreshGUI() {
