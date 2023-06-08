@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
     private void Start()
     {
@@ -56,5 +57,13 @@ public class LevelManager : MonoBehaviour
         LevelStatus levelStatus=(LevelStatus)PlayerPrefs.GetInt(level,0);
         Debug.Log("level name :" + level + " and its status is :" + levelStatus);
         return levelStatus;
+    }
+    public void LevelReset()
+    {
+        for(int i = 1; i < Levels.Length; i++)
+        {
+            SetLevelStatus(Levels[i], LevelStatus.locked);
+        }
+        Debug.Log("Levels Has been reset");
     }
 }

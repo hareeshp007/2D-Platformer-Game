@@ -15,6 +15,10 @@ public class LevelSelection : MonoBehaviour
 
     private void LevelSelect()
     {
+        if(LevelName=="Level 1")
+        {
+            PlayerPrefs.SetInt("Collectables", 0);
+        }
         LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
         switch (levelStatus)
         {
@@ -34,4 +38,5 @@ public class LevelSelection : MonoBehaviour
         }
         
     }
+    
 }

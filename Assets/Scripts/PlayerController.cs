@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int Keyscore=10;
     [SerializeField]
     private int health = 3;
+    public int Totaljumps = 2;
 
     public Animator animator;
     public ParticleSystem FailEffect;
@@ -75,6 +76,13 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = Vector2.up * jumppower;
             Onground = false;
         }
+        if(!Onground && Totaljumps > 0 && jump)
+        {
+            Debug.Log("Double Jump");
+            rb2d.velocity = Vector2.up * jumppower;
+            Totaljumps -= 1;
+        }
+        if (Onground) Totaljumps = 2;
         if (Hori < 0)
         {
             scale.x = -1 * Mathf.Abs(scale.x);
@@ -116,7 +124,6 @@ public class PlayerController : MonoBehaviour
     {
         SoundManager.Instance.Play(Sounds.PlayerHurt);
         health-=1;
-        //Debug.Log("health :" + health);
         healthcontroller.Health(health);
         animator.SetTrigger("ishurt");
         if(health <= 0)
